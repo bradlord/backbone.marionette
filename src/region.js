@@ -251,6 +251,7 @@ Marionette.Region = Marionette.Object.extend({
   // of the region.
   attachView: function(view) {
     this.currentView = view;
+    view._parent = this;
     return this;
   },
 

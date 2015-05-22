@@ -893,6 +893,10 @@ describe('region', function() {
       expect(this.view.onShow).not.to.have.been.called;
     });
 
+    it('should set `_parent` on the view', function() {
+      expect(this.view._parent).to.equal(this.region);
+    });
+
     it('should not replace the existing html', function() {
       expect($(this.region.el).text()).to.equal('bar');
     });
