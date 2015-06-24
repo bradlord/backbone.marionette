@@ -352,5 +352,34 @@ describe('base view', function() {
           .and.CalledOnce;
       });
     });
+
+    describe('when view is added to the layout via attachView', function() {
+      beforeEach(function() {
+        this.childView.render();
+        this.layoutView.child.attachView(this.childView);
+        this.childView.triggerMethod('boom', 'foo', 'bar');
+      });
+
+      it('emits the event on the layout', function() {
+        expect(this.layoutEventHandler)
+          .to.have.been.calledWith(this.childView, 'foo', 'bar')
+          .and.to.have.been.calledOn(this.layoutView)
+          .and.CalledOnce;
+      });
+
+      it('invokes the layout on handler', function() {
+        expect(this.layoutEventOnHandler)
+          .to.have.been.calledWith(this.childView, 'foo', 'bar')
+          .and.to.have.been.calledOn(this.layoutView)
+          .and.CalledOnce;
+      });
+
+      it('invokes the layout childEvents handler', function() {
+        expect(this.layoutViewOnBoomHandler)
+          .to.have.been.calledWith(this.childView, 'foo', 'bar')
+          .and.to.have.been.calledOn(this.layoutView)
+          .and.CalledOnce;
+      });
+    });
   });
 });
